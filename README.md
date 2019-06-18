@@ -3,15 +3,11 @@
 # information_estimation
 The codes contained in this repository implement k-nearest neighbor estimators for mutual information and differential entropy for data drawn from a continuous distribution.  
 
-```html
+<html>
  <base target="_blank" />
- li
-{
-  display:inline-block;
-}
 
 <h2> Estimating mutual information </h2>
-The codes KLkNN.R and information.R implement <ul><li><a href = 'https://arxiv.org/abs/cond-mat/0305641'> Kraskov et al (2004)</a></li></ul> Eq. 8 for all mutual information estimates.  For details on the differential entropy estimator in information.R, see <a href = "https://arxiv.org/abs/1904.05850 ">Young and Dunson (2019).</a>
+<p>The codes KLkNN.R and information.R implement <a href = 'https://arxiv.org/abs/cond-mat/0305641'> Kraskov et al (2004)</a> Eq. 8 for all mutual information estimates.  For details on the differential entropy estimator in information.R, see <a href = "https://arxiv.org/abs/1904.05850 ">Young and Dunson (2019).</a></p>
 
 <h3> KLkNN.R  </h3>
 <h4> Usage    </h4>
@@ -32,7 +28,7 @@ The estimated mutual information of x and y
   </dd> 
   
   <dt> method </dt>
-  <dd><p> Metric to use for k-nearest neighbor distance.  For more details see <a href = 'https://cran.r-project.org/web/packages/KernelKnn/KernelKnn.pdf'> </a> </p></dd>
+  <dd><p> Metric to use for k-nearest neighbor distance.  For more details see <a href = 'https://cran.r-project.org/web/packages/KernelKnn/KernelKnn.pdf'>KernelKNN documentation. </a> </p></dd>
 <h4> Dependencies </h4>
 Library 'KernelKNN' is needed for k-nearest neighbor calculations. 
 
@@ -58,10 +54,10 @@ A dim(X) by dim(X) matrix with entry (i,j) corresponding to the mutual informati
   <dd><p> logical; if TRUE output differential entropy on diagonal.  DEFAULT = FALSE
   
   <dt> method </dt>
-  <dd><p> Metric to use for k-nearest neighbor distance.  For more details see <a href = 'https://cran.r-project.org/web/packages/KernelKnn/KernelKnn.pdf'> </a> </p></dd>
+  <dd><p> Metric to use for k-nearest neighbor distance.  For more details see <a href = 'https://cran.r-project.org/web/packages/KernelKnn/KernelKnn.pdf'>KernelKNN documentation. </a> </p></dd>
   
 <h4> Dependencies </h4>
-Library 'KernelKNN' is needed for k-nearest neighbor calculations. 
+Library <a href = "">'KernelKNN'</a> is needed for k-nearest neighbor calculations. 
 
 
 
@@ -85,4 +81,4 @@ and the differential entropy of <a href="https://www.codecogs.com/eqnedit.php?la
 
 A similar definition holds for <a href="https://www.codecogs.com/eqnedit.php?latex=h(Y)." target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(Y)." title="h(Y)" /></a>
     
-    ```
+</html>
