@@ -57,7 +57,7 @@ A dim(X) by dim(X) matrix with entry (i,j) corresponding to the mutual informati
   <dd><p> Metric to use for k-nearest neighbor distance.  For more details see <a href = 'https://cran.r-project.org/web/packages/KernelKnn/KernelKnn.pdf'>KernelKNN documentation. </a> </p></dd>
   
 <h4> Dependencies </h4>
-Library <a href = "">'KernelKNN'</a> is needed for k-nearest neighbor calculations. 
+Library 'KernelKNN' is needed for k-nearest neighbor calculations. 
 
 
 
