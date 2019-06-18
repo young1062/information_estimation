@@ -1,4 +1,4 @@
-KLkNN <- function(x,y,K, bits = TRUE, method = "chebyshev"){
+KLkNN <- function(x,y,K=1, bits = TRUE, method = "chebyshev"){
   # load library for knn calculation
   library('KernelKnn')
   # put x and y into data frames
@@ -10,7 +10,9 @@ KLkNN <- function(x,y,K, bits = TRUE, method = "chebyshev"){
     DX <-  knn.index.dist(data.frame(x), TEST_data = NULL, k = Nx-1, method = method, threads = 4, transf_categ_cols = F);
     DY <-  knn.index.dist(data.frame(y), TEST_data = NULL, k = Nx-1, method = method, threads = 4, transf_categ_cols = F);
     DXY <- knn.index.dist(cbind(x,y)   , TEST_data = NULL, k = K,    method = method, threads = 4, transf_categ_cols = F);
-    newVar <- digamma(K) + digamma(Nx) - mean(digamma(rowSums(DX$train_knn_dist < DXY$train_knn_dist[,K])) + digamma(rowSums(DY$train_knn_dist < DXY$train_knn_dist[,K])))
+    newVar <- digamma(K) + digamma(Nx) - 
+      mean(digamma(1+rowSums(DX$train_knn_dist < DXY$train_knn_dist[,K])) + 
+           digamma(1+rowSums(DY$train_knn_dist < DXY$train_knn_dist[,K])))
     if (bits == TRUE){ # convert MI to bit (DEFAULT)
       newVar <- newVar/log(2) # convert output to bits
     }

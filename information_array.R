@@ -3,7 +3,9 @@ information <- function(data, K = 1, bits = TRUE, entropy = FALSE, method = "che
   library('KernelKnn')
   
   # extract variable numbers and names
-  nvars <- dim(data)
+  temp <- dim(data)
+  nobser <- temp[1]
+  nvars <- temp[2]; rm(temp)
   Var_names <- colnames(data)
   
   # create variable for output of information matrix
@@ -14,7 +16,7 @@ information <- function(data, K = 1, bits = TRUE, entropy = FALSE, method = "che
   # create variables and save kNN information
   DX <- array(NA, c(nobser,nobser-1,nvars))
   for (i in 1:nvars){
-    temp <- knn.index.dist(data.frame(data[,i]), 
+    temp <- knn.index.dist(data.frame(data[i]), 
                            TEST_data = NULL, 
                            k = nobser-1, 
                            method = method, 
@@ -27,12 +29,14 @@ information <- function(data, K = 1, bits = TRUE, entropy = FALSE, method = "che
   # calculate MI
   for (i in 1:(nvars-1)){
     for (j in (i+1):nvars){
-      DXY <- knn.index.dist(data.frame(cbind(data[,i],data[,j]))              ,
+      DXY <- knn.index.dist(data.frame(cbind(data[i],data[j]))              ,
                             TEST_data = NULL, 
                             k = K,   
                             method = method, 
                             threads = 4)
-      information[i,j] <- digamma(K) + digamma(nobser) - mean(digamma(rowSums(DX[,,i] < DXY$train_knn_dist[,K])) + digamma(rowSums(DX[,,j] < DXY$train_knn_dist[,K])))
+      information[i,j] <- digamma(K) + digamma(nobser) - 
+        mean(digamma(1+rowSums(DX[,,i] < DXY$train_knn_dist[,K])) + 
+             digamma(1+rowSums(DX[,,j] < DXY$train_knn_dist[,K])))
       }
   }
   information <- information + t(information)
@@ -42,12 +46,14 @@ information <- function(data, K = 1, bits = TRUE, entropy = FALSE, method = "che
     for (i in 1:nvars){
       information[i,i] <- log(nobser) - digamma(K) + log(2) + mean(log(DX[,K,i]))
     }
+  } else {
+    diag(information <- NA)
   }
   
   # output in bits
   if (bits == TRUE){
-    newVar <- information/log(2)
+    information <- information/log(2)
   }
   
-  return(newVar)
+  return(information)
 }
